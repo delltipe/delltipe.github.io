@@ -3,128 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Willify</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="home.css">
+    <title>Portfolio | CS Student @ Binus</title>
+    <style>
+        /* MODERN CSS VARIABLES */
+        :root {
+            --bg-color-start: #121212;
+            --bg-color-end: #000000;
+            --card-bg: #1E1E1E;
+            --accent: #00ADB5; /* Tech Blue/Cyan */
+            --text-main: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* GLOBAL STYLES */
+        body {
+            /* Added a subtle gradient background for depth instead of flat color */
+            background: linear-gradient(135deg, var(--bg-color-start) 0%, var(--bg-color-end) 100%);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            min-height: 100vh; /* Ensures gradient stretches full height */
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        a:hover { color: var(--accent); }
+        
+        /* LAYOUT UTILITIES */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HERO SECTION WITH PROFILE IMAGE */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        /* NEW: Styles for the profile picture */
+        .profile-img-container {
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            /* This ensures the image is a perfect circle */
+            border-radius: 50%; 
+            /* A border that matches the accent color */
+            border: 3px solid var(--accent);
+            /* Ensures the image fills the circle without stretching */
+            object-fit: cover;
+            /* A subtle glow effect around the image */
+            box-shadow: 0 0 25px rgba(0, 173, 181, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .highlight { color: var(--accent); }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 30px; /* More modern rounded buttons */
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 173, 181, 0.4);
+            color: black; /* keeps text black on hover */
+        }
+
+        /* SKILLS SECTION */
+        .skills-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05); /* Subtle transparent background */
+            border: 1px solid var(--accent);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        /* PROJECT GRID */
+        .projects-section { padding: 40px 0; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Subtle lift effect on hover */
+        .card:hover { 
+            border-color: var(--accent); 
+            transform: translateY(-5px);
+        }
+
+        .card-content { 
+            padding: 25px; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title { font-size: 1.4rem; margin-top: 0; margin-bottom: 15px; }
+        
+        .card-desc { 
+            color: var(--text-secondary); 
+            font-size: 0.95rem; 
+            flex-grow: 1; /* Pushes the tech stack and link to bottom */
+            margin-bottom: 20px;
+        }
+
+        .card-tech {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 600;
+        }
+        
+        .project-link {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* NEW: Responsive Video Embed Container */
+.video-embed {
+    position: relative;
+    width: 100%;
+    /* 56.25% is the aspect ratio for 16:9 videos (9/16 * 100) */
+    padding-bottom: 56.25%; 
+    height: 0;
+    margin-bottom: 15px;
+    border-radius: 8px; /* Matches card aesthetic */
+    overflow: hidden;
+}
+
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Removes the default iframe border */
+}
+
+/* Updated project link spacing */
+.project-link {
+    display: block;
+    margin-top: 5px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 50px;
+            border-top: 1px solid #2c2c2c;
+            color: var(--text-secondary);
+        }
+    </style>
 </head>
 <body>
-    <!-- navbar -->
-    <nav>
-        <div class="logo">
-            <h2>Willify</h2>
+
+    <header>
+        <div class="container">
+            <div class="profile-img-container">
+                <img src="https://via.placeholder.com/160" alt="Profile Picture" class="profile-img">
+            </div>
+
+            <h1>Hello, I'm <span class="highlight">[Your Name]</span></h1>
+            <p class="subtitle">
+                Computer Science Student at <strong>Binus University</strong><br>
+                Front-End • UI/UX • Application Developer
+            </p>
+            <a href="mailto:your.email@binus.ac.id" class="btn">Contact Me</a>
         </div>
-        <div class="nav-items">
-            <ul class="overview">
-                <li><a href="songs-page.html">Songs List</a></li>
-            </ul>
-            <ul class="account">
-                <li><a href="signup-page.html">Register</a></li>
-                <li><a href="login-page.html">Log In</a></li>
-            </ul>
+    </header>
+
+    <section class="container skills-section">
+        <h2>Technical Stack</h2>
+        <div class="skills-grid">
+            <span class="skill-tag">HTML5 / CSS3</span>
+            <span class="skill-tag">JavaScript / PHP / Laravel</span>
+            <span class="skill-tag">Java / C++</span>
+            <span class="skill-tag">Figma / Canva (UI/UX & Graphic Design)</span>
+            <span class="skill-tag">**After Effects / Premiere Pro**</span>
+            <span class="skill-tag">Git / GitHub</span>
         </div>
-    </nav>
+    </section>
 
-    <!-- tombol signup opsional -->
-    <div class="connect">
-        <h2>Connect to <span class="highlight">Willify</span></h2>
-        <h1>Your Personal Soundtrack Awaits.</h1>
-        <button type="button" onclick="window.location.href='signup-page.html'">Connect for Free</button>
-    </div>
-
-    <!-- area kartu musik best seller-->
-    <div class="best-sellers">
-        <h1>Willify <span class="highlight">Best Sellers</span></h1>
-        <h2>Our most popular songs based on sales.</h2>
-    </div>
-    <!-- flexbox kartu musik -->
-    <div class="bestseller-container">
-        <a href="kendrick.html">
-            <div class="song-content">
-                <img src="images/kendrick.png" alt="kendrick">
-                <h1>Not Like Us</h1>
-                <h2>Kendrick Lamar</h2>
-            </div>
-        </a>
-        <a href="rex.html">
-            <div class="song-content">
-                <img src="images/rex.jpeg" alt="rex">
-                <h1>Pluto Projector</h1>
-                <h2>Rex Orange County</h2>
-            </div>
-        </a>
-        <a href="niki.html">
-            <div class="song-content">
-                <img src="images/niki.png" alt="niki">
-                <h1>Take A Chance With Me</h1>
-                <h2>NIKI</h2>
-            </div>
-        </a>
-        <a href="beihold.html">
-            <div class="song-content">
-                <img src="images/beihold.png" alt="beihold">
-                <h1>Numb Little Bug</h1>
-                <h2>Em Beihold</h2>
-            </div>
-        </a>
-    </div>
-
-    <!-- area caption tambahan -->
-    <div class="discover">
-        <div class="text">
-            <div class="p1">
-                <h2>Discover millions of tracks, personalized playlists,</h2>
-                <h2>and high-quality audio.</h2>
-            </div>
-            <div class="p2">
-                <h2>Join our global music community and</h2>
-                <h2>elevate your listening experience.</h2>
+    <section class="container projects-section">
+    <h2>Featured Projects</h2>
+    <div class="grid">
+        
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-title">Explainer Video & Motion Graphics</h3>
+                <div class="video-embed">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="card-desc">
+                    A short motion graphics piece created for a client's product launch, focusing on clean design and timing.
+                </p>
+                <span class="card-tech">Tool: After Effects</span>
+                <a href="[Your YouTube Link]" class="project-link">Watch on YouTube &rarr;</a>
             </div>
         </div>
-    </div>
 
-    <!-- area kartu musik recommended -->
-    <div class="recommended-text">
-        <h1>Willify <span class="highlight">Recommended Songs</span></h1>
-        <h2>Our best songs based on your ears.</h2>
-    </div>
-    <!-- flexbox kartu musik -->
-    <div class="recommended-container">
-        <a href="pamungkas.html">
-            <div class="song-content">
-                <img src="images/pamungkas.png" alt="pamungkas">
-                <h1>One Only</h1>
-                <h2>Pamungkas</h2>
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-title">Short Film / Promotional Edit</h3>
+                <div class="video-embed">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="card-desc">
+                    Edited promotional video showcasing fast-paced cuts, sound design, and color grading for a clean, modern aesthetic.
+                </p>
+                <span class="card-tech">Tool: Premiere Pro</span>
+                <a href="[Your YouTube Link]" class="project-link">Watch on YouTube &rarr;</a>
             </div>
-        </a>
-        <a href="idgitaf.html">
-            <div class="song-content">
-                <img src="images/idgitaf.png" alt="idgitaf">
-                <h1>Satu-Satu</h1>
-                <h2>Idgitaf</h2>
-            </div>
-        </a>
-        <a href="boypablo.html">
-            <div class="song-content">
-                <img src="images/boypablo.png" alt="boypablo">
-                <h1>honey</h1>
-                <h2>boy pablo</h2>
-            </div>
-        </a>
-        <a href="doremi.html">
-            <div class="song-content">
-                <img src="images/doremi.png" alt="doremi">
-                <h1>Mesin Waktu</h1>
-                <h2>Budi Doremi</h2>
-            </div>
-        </a>
-    </div>
-    
-    <!-- area about section -->
-    <div class="about">
-        <div class="logo-about">
-            <h1>Willify</h1>
         </div>
-        <h2>Copyright © 2006-2024 Willify, LLC</h2>
-        <a href="about-page.html">About Us</a>
+
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-title">App UI & Branding Design</h3>
+                <p class="card-desc">
+                    Comprehensive design package including the mobile app UI (Figma) and supporting branding assets (Canva).
+                </p>
+                <span class="card-tech">Tool: Figma Prototype, Canva Assets</span>
+                <a href="[Your Figma Prototype Share Link]" class="project-link">View Figma Prototype &rarr;</a>
+                <a href="[Your Canva Design Share Link]" class="project-link" style="margin-left: 15px;">View Canva Assets &rarr;</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-title">E-Commerce Web App</h3>
+                <p class="card-desc">
+                    A dynamic web application built using MVC architecture, demonstrating back-end logic and front-end design integration.
+                </p>
+                <span class="card-tech">Stack: PHP, Laravel, MySQL, Bootstrap</span>
+                <a href="#" class="project-link">View Code on GitHub &rarr;</a>
+            </div>
+        </div>
+        
     </div>
+</section>
+
+    <footer>
+        <p>Designed & Built by [Your Name] &copy; 2025</p>
+    </footer>
+
 </body>
 </html>
